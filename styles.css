@@ -1,0 +1,297 @@
+/* DEFINIÇÃO DE TODAS AS VARIÁVEIS DO SISTEMA */
+:root {
+    /* Cores e Temas - LIGHT (Padrão) */
+    --bg-body: #f8faff;
+    --bg-card: #ffffff;
+    --text-main: #000000;
+    --text-muted: #333333;
+    --accent: #1a73e8; 
+    --nota-bg: #fffceb;
+    --nota-border: #f1e4a1;
+    --nota-text: #5d4d00;
+    --paragraph-border: rgba(0,0,0,0.05);
+    --hover-highlight: rgba(26, 115, 232, 0.05);
+
+    /* Tipografia */
+    --font-main: 'Segoe UI', Arial, sans-serif;
+    --font-size-base: 1.8rem;
+    --line-height-base: 2.4; 
+    --paragraph-spacing: 2.5rem; 
+
+    /* Layout */
+    --container-width: 1450px; /* Expandido para usar mais a tela */
+    --border-radius: 20px;
+    --shadow-intensity: rgba(0, 0, 0, 0.12);
+    --transition-speed: 0.25s;
+    --padding-desktop: 60px 5%; /* Reduzido de 12% para 5% para ganhar espaço lateral */
+}
+
+/* TEMA ESCURO (DEEP OCEAN) */
+body.dark-mode {
+    --bg-body: #0a0e14;
+    --bg-card: #151921;
+    --text-main: #e0e6ed;
+    --text-muted: #b0b8c1;
+    --accent: #4dabf7;
+    --nota-bg: #1c1900;
+    --nota-border: #3d3a00;
+    --nota-text: #fcc419;
+    --paragraph-border: rgba(255,255,255,0.1);
+    --hover-highlight: rgba(77, 171, 247, 0.1);
+    --shadow-intensity: rgba(0, 0, 0, 0.6);
+}
+
+/* TEMA SÉPIA (ANTIQUE) */
+body.sepia-mode {
+    --bg-body: #f1e7d0;
+    --bg-card: #fdf6e3;
+    --text-main: #433422;
+    --text-muted: #5f4b32;
+    --accent: #b58900;
+    --nota-bg: #eee8d5;
+    --nota-border: #d5ccba;
+    --nota-text: #657b83;
+    --paragraph-border: rgba(67, 52, 34, 0.1);
+    --hover-highlight: rgba(181, 137, 0, 0.05);
+}
+
+/* RESET E BASE */
+* {
+    box-sizing: border-box;
+    transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: var(--font-size-base);
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+/* BARRA DE PROGRESSO */
+#progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    z-index: 2000;
+}
+#progress-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    box-shadow: 0 0 15px var(--accent);
+}
+
+/* CONTAINER PRINCIPAL */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 40px auto;
+    background: var(--bg-card);
+    padding: var(--padding-desktop); /* Agora usa a variável otimizada */
+    box-shadow: 0 20px 60px var(--shadow-intensity);
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+/* FORMATAÇÃO DE PARÁGRAFOS */
+.content p {
+    text-indent: 3rem; /* Adiciona a tabulação na primeira linha */
+    margin-bottom: var(--paragraph-spacing);
+    padding-left: 25px;
+    border-left: 6px solid var(--paragraph-border);
+    transition: border-left 0.2s, background 0.2s;
+}
+
+.content div {
+    margin-bottom: var(--paragraph-spacing);
+    padding-left: 25px;
+    border-left: 6px solid var(--paragraph-border);
+    transition: border-left 0.2s, background 0.2s;
+}
+
+/* Efeito de Foco no Parágrafo Atual */
+.content p:hover, .content div:hover {
+    border-left: 6px solid var(--accent);
+    background-color: var(--hover-highlight);
+    border-radius: 0 12px 12px 0;
+}
+
+/* TÍTULOS */
+h1 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--accent);
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-top: 5rem;
+    margin-bottom: 2.5rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+h2::before {
+    content: "";
+    height: 35px;
+    width: 10px;
+    background: var(--accent);
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+/* NOTA DO ORADOR */
+.nota-orador {
+    background: var(--nota-bg);
+    color: var(--nota-text);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--nota-border);
+    font-style: italic;
+    margin: 3rem 0;
+    font-size: 0.95em;
+    line-height: 1.8;
+}
+
+/* CONTROLES FLUTUANTES */
+#controls {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 2000;
+}
+
+.btn-ctrl {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    border: none;
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px var(--shadow-intensity);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-ctrl:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px var(--shadow-intensity);
+}
+
+/* NAVEGAÇÃO */
+#nav-menu {
+    position: sticky;
+    top: 20px;
+    margin-bottom: 50px;
+    padding: 15px;
+    background: var(--bg-card);
+    border: 1px solid var(--paragraph-border);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 5px 15px var(--shadow-intensity);
+    z-index: 100;
+}
+
+#nav-menu a {
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+#nav-menu a:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+    .container { max-width: 95%; margin: 20px auto; padding: 40px 4%; }
+}
+
+@media (max-width: 768px) {
+    .container { margin: 0; border-radius: 0; padding: 30px 5%; }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.8rem; }
+    #nav-menu { display: none; }
+}
+
+@media print {
+    #controls, #nav-menu, #progress-container, #timer-container { display: none; }
+    .container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
+}
+
+/* ESTILO DO CRONÔMETRO */
+#timer-container {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* Posicionado à esquerda para não conflitar com os controles */
+    background: var(--bg-card);
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 25px var(--shadow-intensity);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 2000;
+    border: 1px solid var(--paragraph-border);
+}
+
+#timer-display {
+    font-family: monospace;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--accent);
+    min-width: 90px;
+}
+
+#timer-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.timer-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    border: none;
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.timer-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.05);
+}
