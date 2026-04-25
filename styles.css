@@ -3,6 +3,7 @@
     /* Cores e Temas - LIGHT (Padrão) */
     --bg-body: #f8faff;
     --bg-card: #ffffff;
+    --bg-card-rgb: 255, 255, 255;
     --text-main: #000000;
     --text-muted: #333333;
     --accent: #1a73e8; 
@@ -19,17 +20,18 @@
     --paragraph-spacing: 2.5rem; 
 
     /* Layout */
-    --container-width: 1450px; /* Expandido para usar mais a tela */
+    --container-width: 1450px;
     --border-radius: 20px;
     --shadow-intensity: rgba(0, 0, 0, 0.12);
     --transition-speed: 0.25s;
-    --padding-desktop: 60px 5%; /* Reduzido de 12% para 5% para ganhar espaço lateral */
+    --padding-desktop: 60px 5%;
 }
 
 /* TEMA ESCURO (DEEP OCEAN) */
 body.dark-mode {
     --bg-body: #0a0e14;
     --bg-card: #151921;
+    --bg-card-rgb: 21, 25, 33;
     --text-main: #e0e6ed;
     --text-muted: #b0b8c1;
     --accent: #4dabf7;
@@ -45,6 +47,7 @@ body.dark-mode {
 body.sepia-mode {
     --bg-body: #f1e7d0;
     --bg-card: #fdf6e3;
+    --bg-card-rgb: 253, 246, 227;
     --text-main: #433422;
     --text-muted: #5f4b32;
     --accent: #b58900;
@@ -94,7 +97,7 @@ body {
     max-width: var(--container-width);
     margin: 40px auto;
     background: var(--bg-card);
-    padding: var(--padding-desktop); /* Agora usa a variável otimizada */
+    padding: var(--padding-desktop);
     box-shadow: 0 20px 60px var(--shadow-intensity);
     border-radius: var(--border-radius);
     position: relative;
@@ -102,7 +105,7 @@ body {
 
 /* FORMATAÇÃO DE PARÁGRAFOS */
 .content p {
-    text-indent: 3rem; /* Adiciona a tabulação na primeira linha */
+    text-indent: 3rem;
     margin-bottom: var(--paragraph-spacing);
     padding-left: 25px;
     border-left: 6px solid var(--paragraph-border);
@@ -166,7 +169,7 @@ h2::before {
     line-height: 1.8;
 }
 
-/* CONTROLES FLUTUANTES */
+/* CONTROLES FLUTUANTES COM GLASSMORPHISM */
 #controls {
     position: fixed;
     bottom: 30px;
@@ -181,21 +184,25 @@ h2::before {
     width: 65px;
     height: 65px;
     border-radius: 18px;
-    border: none;
-    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(var(--bg-card-rgb), 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--text-main);
     font-size: 1.6rem;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 8px 20px var(--shadow-intensity);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
 }
+
 .btn-ctrl:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px var(--shadow-intensity);
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(var(--bg-card-rgb), 0.9);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
 }
 
 /* NAVEGAÇÃO */
@@ -224,7 +231,7 @@ h2::before {
     font-size: 1.1rem;
     transition: all 0.2s;
 }
-#nav-menu a:hover {
+#nav-menu a:hover, #nav-menu a.active-nav {
     background: var(--accent);
     color: white;
 }
@@ -241,25 +248,27 @@ h2::before {
     #nav-menu { display: none; }
 }
 
-@media print {
-    #controls, #nav-menu, #progress-container, #timer-container { display: none; }
-    .container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
-}
-
-/* ESTILO DO CRONÔMETRO */
+/* ESTILO DO CRONÔMETRO COM GLASSMORPHISM */
 #timer-container {
     position: fixed;
     bottom: 30px;
-    left: 30px; /* Posicionado à esquerda para não conflitar com os controles */
-    background: var(--bg-card);
-    padding: 15px 25px;
+    left: 30px;
+    background: rgba(var(--bg-card-rgb), 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px;
     border-radius: var(--border-radius);
-    box-shadow: 0 8px 25px var(--shadow-intensity);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
     z-index: 2000;
-    border: 1px solid var(--paragraph-border);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+#timer-container:hover {
+    background: rgba(var(--bg-card-rgb), 0.9);
 }
 
 #timer-display {
@@ -294,4 +303,57 @@ h2::before {
     background: var(--accent);
     color: white;
     transform: scale(1.05);
+}
+
+/* CLASSE DE FOCO ATIVO */
+.content p.focused-p, .content div.focused-p {
+    border-left: 8px solid var(--accent) !important;
+    background-color: var(--hover-highlight) !important;
+    border-radius: 0 15px 15px 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+    transform: translateX(5px);
+}
+
+/* OTIMIZAÇÃO DE IMPRESSÃO */
+@media print {
+    #controls, #nav-menu, #progress-container, #timer-container, #wakelock-status { 
+        display: none !important; 
+    }
+    
+    .container { 
+        box-shadow: none !important; 
+        margin: 0 !important; 
+        width: 100% !important; 
+        max-width: 100% !important; 
+        padding: 0 !important; 
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt !important;
+    }
+
+    .content p, .content div {
+        border-left: none !important;
+        padding-left: 0 !important;
+        page-break-inside: avoid;
+    }
+
+    .nota-orador {
+        background: #f9f9f9 !important;
+        border: 1px solid #ccc !important;
+        color: #333 !important;
+        padding: 15px !important;
+        margin: 20px 0 !important;
+        page-break-inside: avoid;
+    }
+
+    h1, h2 {
+        page-break-after: avoid;
+    }
+
+    h2 {
+        margin-top: 30px !important;
+    }
 }
