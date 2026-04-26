@@ -17,7 +17,8 @@
     <div id="controls">
         <button class="btn-ctrl" onclick="changeTheme()" title="Mudar Tema" aria-label="Mudar Tema">🌓</button>
         <button class="btn-ctrl" onclick="adjustFont(0.1)" title="Aumentar Letra" aria-label="Aumentar Letra">+</button>
-        <button class="btn-ctrl" onclick="adjustFont(-0.1)" title="Diminuir Letra" aria-label="Diminuir Letra">-</button>
+        <button class="btn-ctrl" onclick="adjustFont(-0.1)" title="Diminuir Letra"
+            aria-label="Diminuir Letra">-</button>
     </div>
 
     <div class="container">
@@ -111,9 +112,11 @@
                 texto por um momento. Por que Jeová faria que desejássemos algo que não poderíamos ter?
             </p>
             <ul>
-                <li class="selectable">Os pássaros nascem com o desejo, ou o instinto de voar porque eles foram criados com asas e ossos
+                <li class="selectable">Os pássaros nascem com o desejo, ou o instinto de voar porque eles foram criados
+                    com asas e ossos
                     leves.</li>
-                <li class="selectable">Os peixes têm o desejo, ou instinto de nadar porque eles possuem barbatanas e brânquias.</li>
+                <li class="selectable">Os peixes têm o desejo, ou instinto de nadar porque eles possuem barbatanas e
+                    brânquias.</li>
             </ul>
 
             <p class="selectable">
@@ -547,18 +550,30 @@
                 for finalmente o Paraíso que o nosso Criador nos prometeu.
                 E isso, meus irmãos e amigos, é o que significa ser salvos.
             </p>
+
+            <p class="selectable">
+                <strong>Conclusão final:</strong> A pergunta "Quem se salvará?" agora tem uma resposta que depende
+                exclusivamente de cada um de nós. Não deixe para amanhã o que pode garantir a sua salvação desde já.
+                Aceite esse convite hoje. Segure firme na mão de Jeová com todo o seu <strong>coração</strong>, com toda
+                a sua <strong>alma</strong> e com toda a sua <strong>mente</strong>. Comece hoje mesmo a caminhar na
+                estrada estreita que conduz à vida eterna. Que todos possamos estar lá, juntos e felizes, quando a Terra
+                for finalmente o Paraíso que o nosso Criador nos prometeu.
+                E isso, meus irmãos e amigos, é o que significa ser salvos.
+            </p>
         </div>
     </div>
 
     <div id="timer-container">
         <div id="timer-setup" style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Alvo (min):</span>
-            <input type="number" id="target-minutes" value="30" min="1" style="width: 50px; padding: 5px; border-radius: 8px; border: 1px solid var(--paragraph-border); background: var(--bg-body); color: var(--text-main); font-weight: bold;">
+            <input type="number" id="target-minutes" value="30" min="1"
+                style="width: 50px; padding: 5px; border-radius: 8px; border: 1px solid var(--paragraph-border); background: var(--bg-body); color: var(--text-main); font-weight: bold;">
         </div>
         <div style="display: flex; align-items: center; gap: 20px;">
             <div id="timer-display">00:00</div>
             <div id="timer-controls">
-                <button class="timer-btn" onclick="toggleTimer()" id="btn-start-pause" title="Iniciar/Pausar" aria-label="Iniciar ou Pausar">▶</button>
+                <button class="timer-btn" onclick="toggleTimer()" id="btn-start-pause" title="Iniciar/Pausar"
+                    aria-label="Iniciar ou Pausar">▶</button>
                 <button class="timer-btn" onclick="resetTimer()" title="Zerar" aria-label="Zerar">⏹</button>
             </div>
         </div>
@@ -597,7 +612,7 @@
 
         // Foco no Parágrafo ao Clicar
         document.querySelectorAll('.selectable').forEach(el => {
-            el.addEventListener('click', function() {
+            el.addEventListener('click', function () {
                 document.querySelectorAll('.selectable').forEach(p => p.classList.remove('focused-p'));
                 this.classList.add('focused-p');
             });
@@ -631,7 +646,7 @@
             const secs = seconds % 60;
             const display = document.getElementById('timer-display');
             const targetMins = parseInt(document.getElementById('target-minutes').value) || 30;
-            
+
             display.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
 
             // Lógica de Cores baseada no Alvo
